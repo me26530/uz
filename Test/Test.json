@@ -7,5 +7,14 @@
         "codeID": "Yj5Fvt6Wf901MqxpIKdKmrmmLgwDkjDN",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/wanou.txt",
         "type": 101
+    },
+    {
+        "name": "📺BL",
+        "version": 1,
+        "remark": "🍃豆儿出品，不属精品！仅供测试",
+        "webSite": "douer",
+        "codeID": "rsjzUDRYZ731POQNKUy5bJNiC62nWFhu",
+        "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/bl.txt",
+        "type": 101
     }
 ]
