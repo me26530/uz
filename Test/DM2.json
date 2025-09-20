@@ -1,11 +1,11 @@
 [
     {
         "name": "新弹幕扩展",
-        "version": 1,
-        "remark": "",
+        "version": 2,
+        "remark": "🍃豆儿出品，不属精品！",
         "env": "新弹幕扩展API地址##默认: https://dmapi.do-u.me/87654321",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/danMu5.txt",
-        "codeID": "bhSPosKiHncwO794LuDFqYtOlcbD5Ap3",
+        "codeID": "2gtqh2DKHHgH3l2kKIhzZgiH3P2PjxGL",
         "type": 400
     }
 ]
