@@ -26,5 +26,14 @@
         "codeID": "swAEnJ2uRVzAk8hp3Ba1Es6GfAk4TdpC",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/alist.txt",
         "type": 101
+    },
+    {
+        "name": "🎵GD音乐台",
+        "version": 1,
+        "remark": "🍃豆儿出品，不属精品！仅供测试！所有内容均来自GD音乐台 music.gdstudio.xyz",
+        "webSite": "https://music.gdstudio.xyz/",
+        "codeID": "oTAeIEmElWmv5riOD7KMndFFzl29upjR",
+        "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/gdstudio.txt",
+        "type": 101
     }
 ]
