@@ -1,5 +1,15 @@
 [
     {
+        "name": "🍿Emby²",
+        "version": 4,
+        "remark": "🍃豆儿出品，不属精品！仅供测试！请使用不限制客户端的账号测试，封号概不负责！",
+        "webSite": "emby服务器地址",
+        "codeID": "ZIAIpUbdslrfD1wBeOhvlReaxaJQK41w",
+        "env": "Emby用户名##登录用户名&&Emby密码##登录密码&&Emby客户端名称##客户端标识(默认Hills Windows)&&Emby客户端版本##客户端版本(默认0.2.3)&&Emby设备名称##设备名称(默认DESKTOP-QGQFVB7)&&Emby用户代理##User-Agent(默认Hills Windows/0.2.3)",
+        "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/emby.txt",
+        "type": 101
+    },
+    {
         "name": "酷我听书",
         "version": 1,
         "remark": "🍃豆儿出品，不属精品！",
