@@ -1,0 +1,12 @@
+[
+  {
+    "name": "新弹幕扩展",
+    "version": 3,
+    "remark": "🍃豆儿出品，不属精品！",
+    "env": "新弹幕扩展API地址##默认: https://dmapi.do-u.me/87654321",
+    "codeID": "sZ01TtRwT5jCXtAIvy0HUb9JukA8zRax",
+    "order": "A01",
+    "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/danMu5.txt",
+    "type": 400
+  }
+]
