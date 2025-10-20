@@ -10,10 +10,10 @@
     },
     {
         "name": "豆哔",
-        "version": 2,
+        "version": 3,
         "webSite": "doubi",
         "remark": "🍃豆儿出品，不属精品！DASH格式暂无声音",
-        "codeID": "0CKqSKKXsf8s5Ifwpw4GAHiWdlHGc1GV",
+        "codeID": "aKl5xdSIRnSkVOB2J7VKE1frjcyOjQR6",
         "env": "bili_cookie##bili_cookie 用于获取个性化推荐和高清视频",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/doubi.txt",
         "type": 101
