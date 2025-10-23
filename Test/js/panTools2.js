@@ -1823,11 +1823,31 @@ class Pan115 {
                 }
             )
 
-            if (response.data?.error?.includes?.('登录')) {
-                return new PanPlayInfo('', '115盘登录失败，请前往【配置】站源进行配置')
+            // 解析响应数据（可能是字符串）
+            let responseData = response.data
+            if (typeof responseData === 'string') {
+                responseData = JSON.parse(responseData)
             }
 
-            const resData = JSON.parse(this.decrypt115(response.data.data))
+            if (!responseData) {
+                return new PanPlayInfo('', '115盘无响应数据')
+            }
+
+            // 优先检查 state 和 error
+            if (responseData.state === false) {
+                const errorMsg = responseData.error || '未知错误'
+                if (errorMsg.includes('登录')) {
+                    return new PanPlayInfo('', '请在 设置 -> 数据管理 -> 环境变量 中为115Cookie添加值')
+                }
+                return new PanPlayInfo('', `115盘错误: ${errorMsg}`)
+            }
+
+            // 检查 data 字段是否存在且为字符串
+            if (!responseData.data || typeof responseData.data !== 'string') {
+                return new PanPlayInfo('', '请在 设置 -> 数据管理 -> 环境变量 中为115Cookie添加值')
+            }
+
+            const resData = JSON.parse(this.decrypt115(responseData.data))
             return new PanPlayInfo(resData.url.url)
         } catch (error) {
             return new PanPlayInfo('', error.toString())
