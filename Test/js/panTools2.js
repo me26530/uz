@@ -1,7 +1,7 @@
 //@name:夸克|UC|天翼|123|百度|移动|pikpak|115|解析
-//@version:37
+//@version:38
 //@remark:iOS14 以上版本可用,App v1.6.54 及以上版本可用
-//@env:百度网盘Cookie##用于播放百度网盘视频&&UCCookie##用于播放UC网盘视频&&夸克Cookie##用于播放Quark网盘视频&&转存文件夹名称##在各网盘转存文件时使用的文件夹名称&&123网盘账号##用于播放123网盘视频&&123网盘密码##用于播放123网盘视频&&天翼网盘账号##用于播放天翼网盘视频&&天翼网盘密码##用于播放天翼网盘视频&&115Cookie##用于播放115网盘视频&&PikPakToken##用于存储登录信息,Bearer 开头&&采集解析地址##内置两个，失效不要反馈。格式：名称1@地址1;名称2@地址2
+//@env:百度网盘Cookie##用于播放百度网盘视频&&UCCookie##用于播放UC网盘视频&&UC_Token##UC网盘 Open API Token（可选，优先使用）&&夸克Cookie##用于播放Quark网盘视频&&转存文件夹名称##在各网盘转存文件时使用的文件夹名称&&123网盘账号##用于播放123网盘视频&&123网盘密码##用于播放123网盘视频&&天翼网盘账号##用于播放天翼网盘视频&&天翼网盘密码##用于播放天翼网盘视频&&115Cookie##用于播放115网盘视频&&PikPakToken##用于存储登录信息,Bearer 开头&&采集解析地址##内置两个，失效不要反馈。格式：名称1@地址1;名称2@地址2
 //@order: A
 
 // ignore
@@ -1234,6 +1234,71 @@ class qs {
     }
 }
 
+/**
+ * 延迟函数
+ * @param {number} ms 延迟毫秒数
+ * @returns {Promise<void>}
+ */
+function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+/**
+ * 查找最佳LCS匹配
+ * @param {Object} mainItem 主项目，需要有 name 属性
+ * @param {Array} targetItems 目标项目数组，每项需要有 name 属性
+ * @returns {Object} 返回 {allLCS, bestMatch, bestMatchIndex}
+ */
+function findBestLCS(mainItem, targetItems) {
+    const results = []
+    let bestMatchIndex = 0
+
+    for (let i = 0; i < targetItems.length; i++) {
+        const currentLCS = UZUtils.lcs(mainItem.name, targetItems[i].name)
+        results.push({ target: targetItems[i], lcs: currentLCS })
+        if (currentLCS.length > results[bestMatchIndex].lcs.length) {
+            bestMatchIndex = i
+        }
+    }
+
+    const bestMatch = results[bestMatchIndex]
+
+    return { allLCS: results, bestMatch: bestMatch, bestMatchIndex: bestMatchIndex }
+}
+
+/**
+ * 生成设备ID
+ * @param {string} timestamp 时间戳
+ * @returns {string} 设备ID（MD5前16位）
+ */
+function generateDeviceID(timestamp) {
+    return Crypto.MD5(timestamp).toString().slice(0, 16)
+}
+
+/**
+ * 生成请求ID
+ * @param {string} deviceID 设备ID
+ * @param {string} timestamp 时间戳
+ * @returns {string} 请求ID（MD5前16位）
+ */
+function generateReqId(deviceID, timestamp) {
+    return Crypto.MD5(deviceID + timestamp).toString().slice(0, 16)
+}
+
+/**
+ * 生成X-Pan-Token签名
+ * @param {string} method HTTP方法
+ * @param {string} pathname 路径名
+ * @param {string} timestamp 时间戳
+ * @param {string} key 签名密钥
+ * @returns {string} SHA256签名
+ */
+function generateXPanToken(method, pathname, timestamp, key) {
+    const data = method + '&' + pathname + '&' + timestamp + '&' + key
+    return Crypto.SHA256(data).toString()
+}
+
+
 
 // MARK: jiexi.js
 // 请勿直接修改，请修改 jiexi.js 文件
@@ -1738,6 +1803,12 @@ class Pan115 {
 
                 if (!responseData.data) return
 
+                // 检查分享链接状态
+                if (responseData.data.share_state === 7) {
+                    const forbidReason = responseData.data.shareinfo?.forbid_reason || '链接已过期'
+                    throw new Error(forbidReason)
+                }
+
                 const files = responseData.data.list.filter((item) => item.fc === 1)
                 const folders = responseData.data.list.filter((o) => o.fc === 0)
 
@@ -1835,7 +1906,8 @@ class Pan115 {
 
             // 优先检查 state 和 error
             if (responseData.state === false) {
-                const errorMsg = responseData.error || '未知错误'
+                // 优先使用 msg 字段，如果没有再使用 error 字段
+                const errorMsg = responseData.msg || responseData.error || '未知错误'
                 if (errorMsg.includes('登录')) {
                     return new PanPlayInfo('', '请在 设置 -> 数据管理 -> 环境变量 中为115Cookie添加值')
                 }
@@ -4588,6 +4660,7 @@ panSubClasses.push(PanPikPak)
 
 
 // 抄自 https://github.com/jadehh/TVSpider
+// 集成了 CatPawOpen-main/nodejs/src/util/uc.js 的 Open API 支持
 
 class QuarkClient {
     static apiUrl = 'https://drive-pc.quark.cn/1/clouddrive/'
@@ -4611,6 +4684,22 @@ class UCClient {
         Referer: 'https://drive.uc.cn',
         'Content-Type': 'application/json',
     }
+
+    // UC Open API 配置
+    static Addition = {
+        DeviceID: '07b48aaba8a739356ab8107b5e230ad4',
+        RefreshToken: '',
+        AccessToken: ''
+    }
+
+    static conf = {
+        api: 'https://open-api-drive.uc.cn',
+        clientID: '5acf882d27b74502b7040b0c65519aa7',
+        signKey: 'l3srvtd7p42l0d0x1u8d7yc8ye9kki4d',
+        appVer: '1.6.8',
+        channel: 'UCTVOFFICIALWEB',
+        codeApi: 'http://api.extscreen.com/ucdrive',
+    }
 }
 
 class QuarkUC {
@@ -4624,6 +4713,8 @@ class QuarkUC {
     }
     uzTag = ''
     ut = ''
+    token = '' // UC Open API token
+    subtitleExts = ['.srt', '.ass', '.scc', '.stl', '.ttml']
 
     get apiUrl() {
         if (this.isQuark) {
@@ -4790,7 +4881,12 @@ class QuarkUC {
         } catch (error) {
             playData.error = error.toString()
         }
-        playData.playHeaders = this.playHeaders
+        // 检查是否有 Open API 返回的 URL
+        const hasOpenAPI = playData.urls.some(u => u.isOpenAPI)
+        if (!hasOpenAPI) {
+            // 只有在没有 Open API URL 时才设置 playHeaders
+            playData.playHeaders = this.playHeaders
+        }
         return playData
     }
 
@@ -4822,7 +4918,9 @@ class QuarkUC {
                 if (data.data?.length > 0) {
                     this.ut = data.data
                 }
-            } else {
+            }
+            // 替换 URL 中的 UT 占位符
+            if (this.ut.length > 0) {
                 url = url.replace(kUC_UTKeyWord, this.ut)
             }
         }
@@ -5220,7 +5318,77 @@ class QuarkUC {
      */
     async getDownload(args) {
         let isMount = args.isMount ?? false
+
+        // UC 网盘优先尝试使用 Open API token 方式
+        if (!this.isQuark && this.token && this.token.length > 0) {
+            try {
+                const pathname = '/file'
+                const timestamp = Math.floor(Date.now() / 1000).toString() + '000'
+                const deviceID = UCClient.Addition.DeviceID || generateDeviceID(timestamp)
+                const reqId = generateReqId(deviceID, timestamp)
+                const x_pan_token = generateXPanToken('GET', pathname, timestamp, UCClient.conf.signKey)
+
+                const config = {
+                    method: 'GET',
+                    url: `${UCClient.conf.api}/file`,
+                    params: {
+                        req_id: reqId,
+                        access_token: this.token,
+                        app_ver: UCClient.conf.appVer,
+                        device_id: deviceID,
+                        device_brand: 'Xiaomi',
+                        platform: 'tv',
+                        device_name: 'M2004J7AC',
+                        device_model: 'M2004J7AC',
+                        build_device: 'M2004J7AC',
+                        build_product: 'M2004J7AC',
+                        device_gpu: 'Adreno (TM) 550',
+                        activity_rect: '{}',
+                        channel: UCClient.conf.channel,
+                        method: 'streaming',
+                        group_by: 'source',
+                        fid: isMount ? args.fileId : this.saveFileIdCaches[args.fileId],
+                        resolution: 'low,normal,high,super,2k,4k',
+                        support: 'dolby_vision'
+                    },
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Linux; U; Android 9; zh-cn; RMX1931 Build/PQ3A.190605.05081124) AppleWebKit/533.1 (KHTML, like Gecko) Mobile Safari/533.1',
+                        'Connection': 'Keep-Alive',
+                        'Accept-Encoding': 'gzip',
+                        'x-pan-tm': timestamp,
+                        'x-pan-token': x_pan_token,
+                        'content-type': 'text/plain;charset=UTF-8',
+                        'x-pan-client-id': UCClient.conf.clientID
+                    }
+                }
+
+                const response = await axios.request(config)
+                if (response.status === 200 && response.data?.data?.video_info) {
+                    const videoInfo = response.data.data.video_info.filter((t) => t.accessable)[0]
+                    if (videoInfo && videoInfo.url) {
+                        // Open API 返回的 URL 已包含认证参数
+                        // 参考 CatPawOpen: 当使用 token 时，不设置 header
+                        // 同时标记这是 Open API 返回的 URL，以便在 getPlayUrl 中不设置 playHeaders
+                        return [
+                            {
+                                name: '原画',
+                                url: videoInfo.url,
+                                headers: {},
+                                priority: 9999,
+                                isOpenAPI: true,  // 标记为 Open API
+                            }
+                        ]
+                    }
+                }
+            } catch (error) {
+                UZUtils.debugLog('UC Open API 获取下载地址失败:', error)
+                // 失败后继续尝试传统方式
+            }
+        }
+
+        // 传统 cookie 方式
         try {
+            // this.pr 中已经包含了 UT 参数（如果有的话）
             const down = await this.api(
                 `file/download?${this.pr}&uc_param_str=`,
                 {
@@ -5229,6 +5397,7 @@ class QuarkUC {
                         : [this.saveFileIdCaches[args.fileId]],
                 }
             )
+
             if (
                 down.data != null &&
                 down.data.length > 0 &&
@@ -5247,13 +5416,26 @@ class QuarkUC {
                     },
                 ]
             }
-        } catch (error) {}
+        } catch (error) {
+            UZUtils.debugLog('获取下载地址失败:', error)
+        }
         return []
     }
 
     async initPan() {
         if (this.cookie.length < 1) {
             this.cookie = await this.getPanEnv(this.getCookieName())
+        }
+
+        // UC 网盘额外初始化 token
+        // UT 会在 api 方法中动态获取，无需从环境变量读取
+        if (!this.isQuark) {
+            if (this.token.length < 1) {
+                const token = await this.getPanEnv('UC_Token')
+                if (token && token.length > 0) {
+                    this.token = token
+                }
+            }
         }
     }
 
