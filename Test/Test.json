@@ -1,10 +1,10 @@
 [
     {
         "name": "豆哔",
-        "version": 8,
+        "version": 9,
         "webSite": "doubi",
         "remark": "🍃豆儿出品，不属精品！内容来自网络 仅供学习测试！ DASH格式暂无声音",
-        "codeID": "JSHVGWRCW4N3BRjpAH8ilxUA0zjNrSnK",
+        "codeID": "9Djl2QaDMOIgvhl8tYAhdVowEsmuPZpA",
         "env": "bili_cookie##bili_cookie 用于获取个性化推荐和高清视频",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/doubi.txt",
         "type": 101
