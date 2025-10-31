@@ -11,11 +11,10 @@
     },
     {
         "name": "PanSou",
-        "version": 1,
+        "version": 2,
         "webSite": "https://so.252035.xyz",
         "remark": "🍃豆儿出品，不属精品！",
-        "codeID": "R2WOs8mQ27qJZrmlp1l7ti3ObaazJ320",
-        "env": "PanSou网盘类型##留空=全部,可选:baidu/aliyun/quark/tianyi/uc/caiyun/123pan/115/xunlei/pikpak,多个用逗号分隔&&PanSou数据来源##留空=all(全部),可选:tg(仅TG)/plugin(仅插件)&&PanSouTG频道列表##留空=默认频道,多个用逗号分隔&&PanSou插件列表##留空=默认插件,可选:pansearch/panta/qupansou/hunhepan/jikepan/pan666,多个用逗号分隔",
+        "codeID": "KbVx88vHdV15XvzvUxCQScqe9Ymk6wCX",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/pansou.txt",
         "type": 101
     }
