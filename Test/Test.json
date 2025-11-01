@@ -1,0 +1,12 @@
+[
+    {
+        "name": "123社区",
+        "version": 1,
+        "webSite": "https://pan1.me",
+        "remark": "🍃豆儿出品，不属精品！内容来自网络 仅供学习测试！",
+        "codeID": "26QUSjb30vJWr1ejaey2KGkx3Aq0pRIv",
+        "env": "123资源社区_Cookie##访问网站需要的Cookie，格式：bbs_token=xxx",
+        "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/123ypzysq.txt",
+        "type": 101
+    }
+]
