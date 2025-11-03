@@ -1,5 +1,5 @@
 //@name:[盘] TG搜
-//@version:12
+//@version:13
 //@webSite:https://t.me/s/
 //@env:TG搜频道列表##格式 频道名称1@频道id1|频道名称2@频道id2
 //@remark:
@@ -146,8 +146,8 @@ const providerRegexMap = Object.values(CLOUD_PROVIDERS).map(provider => ({
 }));
 
 // 预编译剧集信息提取正则表达式，一次匹配解决所有情况
-// 支持: "更新至 第28集", "第28集", "全28集", "共28集", "28集全", "更新至28集", "更至EP01" 等格式
-const EPISODE_COMBINED_REGEX = /((?:更新至|全|第|共)\s*(?:第)?\s*\d+\s*集)|((?:更新至|全|第|共)\s*(?:第)?\s*[一二三四五六七八九十百千万亿]+\s*集)|(\d+\s*集\s*全)|([一二三四五六七八九十百千万亿]+\s*集\s*全)|((?:更至|更)\s*(?:EP)?\s*\d+)/;
+// 支持: "更新至 第28集", "第28集", "全28集", "共28集", "28集全", "更新至28集", "更至EP01", "EP167集", "更新 EP167集", "更新4集", "S01 E27", "S01 E27已更新" 等格式
+const EPISODE_COMBINED_REGEX = /((?:更新至|全|第|共)\s*(?:第)?\s*\d+\s*集)|((?:更新至|全|第|共)\s*(?:第)?\s*[一二三四五六七八九十百千万亿]+\s*集)|(\d+\s*集\s*全)|([一二三四五六七八九十百千万亿]+\s*集\s*全)|((?:更至|更)\s*(?:EP)?\s*\d+)|((?:更新\s*)?EP\d+集)|(更新\d+集)|(S\d+\s*E\d+(?:已更新)?)/;
 
 // 预编译图片URL提取正则表达式
 const IMAGE_URL_REGEX = /url\(['"]?(https?:\/\/[^'")]+)['"]?\)/;
@@ -341,6 +341,7 @@ async function getTGList(url, isSearchContext = false){
                 cleanedTitle = htmlContent
                     .split('<br>')[0]
                     .replace(/<[^>]+>/g, "")
+                    .replace(/&nbsp;/g, ' ')  // 处理 HTML 实体 &nbsp;
                     .trim()
                     .replace(/^(名称[：:])/, '')
                     .trim();
@@ -351,12 +352,29 @@ async function getTGList(url, isSearchContext = false){
 	                    .replace(/^[^\u4e00-\u9fa5A-Za-z0-9\(\[\{（【《「『〔〖〈﹝［]+/, '')
 	                    .trim();
 
+	                // 1.5) 去掉开头的分类标签，如"电视剧 "、"动漫 "、"电影 "等
+	                cleanedTitle = cleanedTitle
+	                    .replace(/^(电视剧|动漫|电影|综艺|纪录片|动画)\s+/, '')
+	                    .trim();
+
+	                // --- 关键修改：在去掉括号之前，先从完整标题中提取剧集信息 ---
+	                // 使用合并的正则表达式，一次匹配解决所有情况
+	                const episodeMatch = cleanedTitle.match(EPISODE_COMBINED_REGEX);
+	                const extractedEpisodeInfoRaw = episodeMatch ? episodeMatch[0] : null;
+	                const extractedEpisodeInfo = extractedEpisodeInfoRaw ? extractedEpisodeInfoRaw.replace(/\s+/g, '') : null;
+	                // --- 提取结束 ---
+
 	                // 2) 根据标题开头是否为括号，选择不同的清理策略
 	                const startsWithBracket = /^[\(\[\{（【《「『〔〖〈﹝［]/.test(cleanedTitle);
 	                if (startsWithBracket) {
-	                    // 标题开头是括号：去掉所有括号及括号内的内容
+	                    // 标题开头是括号：
+	                    // 第一步：去掉开头的括号及其内容
 	                    cleanedTitle = cleanedTitle
-	                        .replace(/[\(\[\{（【《「『〔〖〈﹝［][^\)\]\}）】》」』〕〗〉﹞］]*[\)\]\}）】》」』〕〗〉﹞］]/g, '')
+	                        .replace(/^[\(\[\{（【《「『〔〖〈﹝［][^\)\]\}）】》」』〕〗〉﹞］]*[\)\]\}）】》」』〕〗〉﹞］]/, '')
+	                        .trim();
+	                    // 第二步：去掉之后碰到的第一个括号及其后的所有内容
+	                    cleanedTitle = cleanedTitle
+	                        .replace(/[\(\[\{（【《「『〔〖〈﹝［].*$/, '')
 	                        .trim();
 	                } else {
 	                    // 标题开头不是括号：去掉第一个括号及其后的所有内容
@@ -385,16 +403,12 @@ async function getTGList(url, isSearchContext = false){
                 }
             }
 
-            // --- 尝试从标题中提取剧集/季度信息 --- (移到这里)
-            // 使用合并的正则表达式，一次匹配解决所有情况
-            const episodeMatch = cleanedTitle.match(EPISODE_COMBINED_REGEX);
-            const extractedEpisodeInfoRaw = episodeMatch ? episodeMatch[0] : null;
-            const extractedEpisodeInfo = extractedEpisodeInfoRaw ? extractedEpisodeInfoRaw.replace(/\s+/g, '') : null;
-            // --- 提取结束 ---
+            // 注意：剧集信息提取已在第354-361行的括号清理之前进行
+            // 这样可以确保即使剧集信息在括号后面也能被正确提取
 
             // --- 如果提取了剧集信息，调整vod_name ---
             if (extractedEpisodeInfoRaw) {
-                video.vod_name = cleanedTitle.replace(extractedEpisodeInfoRaw, '').trim();
+                video.vod_name = cleanedTitle.replace(extractedEpisodeInfoRaw, '').replace(/\s+/g, ' ').trim();
             }
             // --- 调整结束 ---
 
@@ -402,7 +416,11 @@ async function getTGList(url, isSearchContext = false){
             // 移除常见的画质、码率、帧率等信息
             video.vod_name = video.vod_name
                 .replace(/\s*4[Kk]\s*(DV|HDR10|SDR|臻彩|杜比)?\s*(高码率|50帧|10bit)?\s*/g, '')
-                .replace(/\s*(DV|HDR10|HDR|SDR|臻彩|杜比|高码率|50帧|25帧|60帧|10bit|WEB-60fpsMAX|WEB-|纯净版|完结|全景声|超高码率|杜比音效|EDR|标码)\s*/g, '')
+                .replace(/\s*(DV|HDR10|HDR|SDR|臻彩|杜比|高码率|50帧|25帧|60帧|10bit|WEB-60fpsMAX|WEB-|纯净版|完结|全景声|超高码率|杜比音效|EDR|标码|Vivid|三维菁彩声|txb)\s*/g, '')
+                .replace(/\s*\d{4}年?\s*/g, '')  // 清理年份信息，如 "2025" 或 "2025年"
+                .replace(/\s*大小\s*\d+\.?\d*\s*[KMGT]B\s*/g, '')  // 清理文件大小，如 "大小9.32GB"
+                .replace(/\d+\.?\d*\s*[KMGT]B/g, '')  // 清理文件大小（无"大小"前缀，可能无空格），如 "9.32GB" 或 "2.96G"
+                .replace(/\s*已?更新\s*/g, '')  // 清理"更新"或"已更新"
                 .replace(/\s*\+\s*/g, ' ')
                 .replace(/\s+/g, ' ')
                 .trim();
