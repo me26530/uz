@@ -1,5 +1,5 @@
 //@name:[盘] TG搜
-//@version:17
+//@version:18
 //@webSite:https://t.me/s/
 //@env:TG搜频道列表##格式 频道名称1@频道id1|频道名称2@频道id2
 //@remark:
@@ -362,6 +362,12 @@ async function getTGList(url, isSearchContext = false){
 	                const episodeMatch = cleanedTitle.match(EPISODE_COMBINED_REGEX);
 	                const extractedEpisodeInfoRaw = episodeMatch ? episodeMatch[0] : null;
 	                const extractedEpisodeInfo = extractedEpisodeInfoRaw ? extractedEpisodeInfoRaw.replace(/\s+/g, '') : null;
+
+	                // 如果找到剧集信息，去掉其前面的逗号
+	                if (extractedEpisodeInfoRaw) {
+	                    const escapedEpisodeInfo = extractedEpisodeInfoRaw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	                    cleanedTitle = cleanedTitle.replace(new RegExp(`，\\s*${escapedEpisodeInfo}`), extractedEpisodeInfoRaw);
+	                }
 	                // --- 提取结束 ---
 
 	                // 2) 根据标题开头是否为括号，选择不同的清理策略
@@ -418,7 +424,7 @@ async function getTGList(url, isSearchContext = false){
             video.vod_name = video.vod_name
                 .replace(/\s*4[Kk]\s*(DV|HDR10|SDR|臻彩|杜比)?\s*(高码率|50帧|10bit)?\s*/g, '')
                 .replace(/\s*\d+[pP]\s*/g, '')  // 清理分辨率+p，如 "1080p"、"720P"
-                .replace(/\s*(杜比视界|杜比音效|WEB-60fpsMAX|WEB-|DV|HDR10|HDR|SDR|臻彩|杜比|高码率|50帧|25帧|60帧|10bit|10BIT|纯净版|完结|全景声|超高码率|EDR|标码|Vivid|三维菁彩声|txb|源码|剧版|无台标|ATVP|IQ|Friday|多国字幕|双语|简中|日语)\s*/g, '')
+                .replace(/\s*(杜比视界|杜比音效|WEB-60fpsMAX|WEB-|DV|HDR10|HDR|SDR|臻彩|杜比|高码率|50帧|25帧|60帧|10bit|10BIT|纯净版|完结|全景声|超高码率|EDR|标码|Vivid|三维菁彩声|txb|源码|剧版|无台标|ATVP|IQ|Friday|多国字幕|双语|简中|日语|无损|特别版)\s*/g, '')
                 .replace(/\s*内封[^\s]*\s*/g, '')  // 清理"内封"及其后续内容，如 "内封多国字幕"、"内封简中日"
                 .replace(/\s*——\s*/g, ' ')  // 清理"——"
                 .replace(/\s*\d{4}年?\s*/g, '')  // 清理年份信息，如 "2025" 或 "2025年"
