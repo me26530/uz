@@ -1,5 +1,5 @@
 //@name:[盘] TG搜
-//@version:18
+//@version:19
 //@webSite:https://t.me/s/
 //@env:TG搜频道列表##格式 频道名称1@频道id1|频道名称2@频道id2
 //@remark:
