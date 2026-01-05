@@ -18,6 +18,15 @@
         "type": 101
     },
     {
+        "name": "🌟荐片",
+        "version": 1,
+        "webSite": "jianpian",
+        "remark": "🍃豆儿出品，不属精品！",
+        "codeID": "DxTfDvFJWn5LEEvxXZpZECUC5BYmCYkF",
+        "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/jianpian.txt",
+        "type": 101
+    },
+    {
         "name": "🏠123社区",
         "version": 1,
         "webSite": "https://pan1.me",
