@@ -25,41 +25,5 @@
         "env": "TG搜频道列表##格式 频道名称1@频道id1|频道名称2@频道id2",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/Pan_tgs.js",
         "type": 101
-    },
-    {
-        "name": "🌟荐片",
-        "version": 1,
-        "webSite": "jianpian",
-        "remark": "🍃豆儿出品，不属精品！",
-        "codeID": "DxTfDvFJWn5LEEvxXZpZECUC5BYmCYkF",
-        "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/jianpian.txt",
-        "type": 101
-    },
-    {
-        "name": "🏠123社区",
-        "version": 1,
-        "webSite": "https://pan1.me",
-        "remark": "🍃豆儿出品，不属精品！内容来自网络 仅供学习测试！",
-        "codeID": "26QUSjb30vJWr1ejaey2KGkx3Aq0pRIv",
-        "env": "123资源社区_Cookie##访问网站需要的Cookie，格式：bbs_token=xxx",
-        "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/123ypzysq.txt",
-        "type": 101
-    },
-    {
-      "name": "✨豆瓣",
-      "version": 4,
-      "remark": "🍃豆儿出品，不属精品！",
-      "webSite": "https://movie.douban.com",
-      "codeID": "4r9lCCTjjoqI5sGDkzho2sNKSL2BQXpc",
-      "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/Jian_douban2.txt",
-      "type": 101
-    },
-    {
-      "name": "豆瓣推荐",
-      "version": 5,
-      "remark": "iOS14 以上版本可用",
-      "codeID": "axVxcuorTKzBGQJnmljkDTkIUQrZklrY",
-      "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/douban.txt",
-      "type": 200
     }
 ]
