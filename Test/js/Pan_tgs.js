@@ -1,5 +1,5 @@
 //@name:TG搜
-//@version:24
+//@version:25
 //@webSite:https://t.me/s/
 //@env:TG搜频道列表##格式 频道名称1@频道id1|频道名称2@频道id2
 //@remark:
@@ -425,7 +425,7 @@ async function getTGList(url, isSearchContext = false){
                 .replace(/\s*\d+\s*\+\s*\d+\s*帧\s*/g, '')  // 清理复合帧率，如 "25+60帧"
                 .replace(/\s*4[Kk]\s*(DV|HDR10|SDR10|臻彩|杜比)?\s*(高码率|50帧|10bit)?\s*/g, '')
                 .replace(/\s*\d+[pP]\s*/g, '')  // 清理分辨率+p，如 "1080p"、"720P"
-                .replace(/\s*(杜比视界|杜比音效|WEB-60fpsMAX|WEB-|DV|HDR10|HDR|SDR|臻彩|杜比|高码率|中码率|50帧|25帧|60帧|10bit|10BIT|纯净版|完结|全景声|超高码率|EDR|标码|Vivid|三维菁彩声|txb|源码|剧版|无台标|ATVP|IQ|Friday|多国字幕|双语|简中|日语|无损|特别版|软字幕|补链接|MAX|中码|音效|高码|台配|国语|环绕声|蓝光原盘|臻享超高清|首播|点映|Viu|10B|硬字幕)\s*/g, '')
+                .replace(/\s*(杜比视界|杜比音效|WEB-60fpsMAX|WEB-|DV|HDR10|HDR|SDR|臻彩|杜比|高码率|中码率|50帧|25帧|60帧|10bit|10BIT|纯净版|完结|全景声|超高码率|EDR|标码|Vivid|三维菁彩声|txb|源码|剧版|无台标|ATVP|IQ|Friday|多国字幕|双语|简中|日语|无损|特别版|软字幕|补链接|MAX|中码|音效|高码|台配|国语|环绕声|蓝光原盘|臻享超高清|首播|点映|Viu|10B|硬字幕|环绕立体声)\s*/g, '')
                 .replace(/\s*内封[^\s]*\s*/g, '')  // 清理"内封"及其后续内容，如 "内封多国字幕"、"内封简中日"
                 .replace(/\s*——\s*/g, ' ')  // 清理"——"
                 .replace(/\s*\d{4}年?\s*/g, '')  // 清理年份信息，如 "2025" 或 "2025年"
