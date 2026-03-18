@@ -4918,7 +4918,11 @@ class QuarkUC {
                 fileId,
                 shareFileToken,
             })
-            playData.urls = shareUrls
+            if (shareUrls.length > 0) {
+                playData.urls = shareUrls
+                this.syncPlayData(playData)
+                return playData
+            }
 
             const saveFileId = await this.save({
                 shareId,
@@ -4929,11 +4933,6 @@ class QuarkUC {
             })
 
             if (saveFileId == null) {
-                if (shareUrls.length > 0) {
-                    playData.urls = shareUrls
-                    this.syncPlayData(playData)
-                    return playData
-                }
                 const info = new PanPlayInfo()
                 info.error = '转存失败，可能空间不足 或 cookie 错误～'
                 return info
@@ -4941,15 +4940,7 @@ class QuarkUC {
             this.saveFileIdCaches = {}
             this.saveFileIdCaches[fileId] = saveFileId
 
-            let urls = shareUrls
-            if (shareUrls.length > 0) {
-                const transcodingUrls = await this.getLiveTranscoding({
-                    fileId: fileId,
-                })
-                urls = [...shareUrls, ...transcodingUrls]
-            } else {
-                urls = await this.getVideoPlayUrl({ fileId: fileId })
-            }
+            let urls = await this.getVideoPlayUrl({ fileId: fileId })
             playData.urls = urls
             this.syncPlayData(playData)
         } catch (error) {
