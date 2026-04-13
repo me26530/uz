@@ -1,5 +1,5 @@
 //@name:TG搜
-//@version:25
+//@version:26
 //@webSite:https://t.me/s/
 //@env:TG搜频道列表##格式 频道名称1@频道id1|频道名称2@频道id2
 //@remark:
@@ -126,6 +126,10 @@ const CLOUD_PROVIDERS = {
     '115': {
         name: '115',
         domains: ['115cdn.com', '115.com', 'anxia.com']
+    },
+    ali: {
+        name: '阿里',
+        domains: ['aliyundrive.com', 'alipan.com']
     },
     pikpak: {
         name: 'PikPak',
