@@ -1,5 +1,5 @@
 //@name:TG搜
-//@version:26
+//@version:27
 //@webSite:https://t.me/s/
 //@env:TG搜频道列表##格式 频道名称1@频道id1|频道名称2@频道id2
 //@remark:
@@ -339,6 +339,8 @@ async function getTGList(url, isSearchContext = false){
             }
 
             const htmlContent = $(message).find('div.tgme_widget_message_text').html()
+            const remarkLine = htmlContent?.match(/<b>\s*备注[：:]\s*<\/b>\s*([^<]+)/i)?.[1]?.replace(/&nbsp;/g, ' ').trim() || ''
+            const episodeLine = htmlContent?.match(/<b>\s*集数[：:]\s*<\/b>\s*([^<]+)/i)?.[1]?.replace(/&nbsp;/g, ' ').trim() || ''
             // 取到第一个 <br> 之前的内容
             let cleanedTitle = '';
             if (htmlContent) {
@@ -364,7 +366,7 @@ async function getTGList(url, isSearchContext = false){
 	                // --- 关键修改：在去掉括号之前，先从完整标题中提取剧集信息 ---
 	                // 使用合并的正则表达式，一次匹配解决所有情况
 	                const episodeMatch = cleanedTitle.match(EPISODE_COMBINED_REGEX);
-	                const extractedEpisodeInfoRaw = episodeMatch ? episodeMatch[0] : null;
+	                const extractedEpisodeInfoRaw = episodeLine || (episodeMatch ? episodeMatch[0] : null);
 	                const extractedEpisodeInfo = extractedEpisodeInfoRaw ? extractedEpisodeInfoRaw.replace(/\s+/g, '') : null;
 
 	                // 如果找到剧集信息，去掉其前面的逗号
@@ -453,7 +455,9 @@ async function getTGList(url, isSearchContext = false){
             if (isSearchContext && currentChannelName !== '未知频道') {
                 remarkParts.push(currentChannelName);
             }
-            if (extractedEpisodeInfo) {
+            if (remarkLine) {
+                remarkParts.push(remarkLine.replace(/\s+/g, ' ').trim());
+            } else if (extractedEpisodeInfo) {
                 remarkParts.push(extractedEpisodeInfo);
             }
 

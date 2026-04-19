@@ -10,6 +10,16 @@
         "type": 101
     },
     {
+        "name": "聚合²",
+        "version": 3,
+        "webSite": "https://example.com",
+        "remark": "🍃豆儿出品，不属精品！资源上传TG版本",
+        "codeID": "pafnuAv8mtqUyU0uq9spiIA9uL2YUxn2",
+        "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/juhe2.txt",
+        "logo": "https://img.geekie.site/i/2026/03/21/140844.png",
+        "type": 101
+    },
+    {
         "name": "玩偶",
         "version": 4,
         "webSite": "http://wogg.xxooo.cf",
@@ -31,7 +41,7 @@
     },
     {
         "name": "TG搜",
-        "version": 26,
+        "version": 27,
         "webSite": "https://t.me/s/",
         "remark": "",
         "env": "TG搜频道列表##格式 频道名称1@频道id1|频道名称2@频道id2",
