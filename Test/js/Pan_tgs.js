@@ -1,5 +1,5 @@
 //@name:TG搜
-//@version:27
+//@version:28
 //@webSite:https://t.me/s/
 //@env:TG搜频道列表##格式 频道名称1@频道id1|频道名称2@频道id2
 //@remark:
@@ -134,6 +134,10 @@ const CLOUD_PROVIDERS = {
     pikpak: {
         name: 'PikPak',
         domains: ['pikpak.me']
+    },
+    guangya: {
+        name: '光鸭',
+        domains: ['guangyapan.com']
     }
 };
 
@@ -341,6 +345,7 @@ async function getTGList(url, isSearchContext = false){
             const htmlContent = $(message).find('div.tgme_widget_message_text').html()
             const remarkLine = htmlContent?.match(/<b>\s*备注[：:]\s*<\/b>\s*([^<]+)/i)?.[1]?.replace(/&nbsp;/g, ' ').trim() || ''
             const episodeLine = htmlContent?.match(/<b>\s*集数[：:]\s*<\/b>\s*([^<]+)/i)?.[1]?.replace(/&nbsp;/g, ' ').trim() || ''
+
             // 取到第一个 <br> 之前的内容
             let cleanedTitle = '';
             if (htmlContent) {
@@ -408,7 +413,6 @@ async function getTGList(url, isSearchContext = false){
                     for (const provider of providerRegexMap) {
                         if (provider.regex.test(url)) {
                             providers.add(provider.name);
-                            // 找到匹配的提供商后跳出，提高性能
                             break;
                         }
                     }
