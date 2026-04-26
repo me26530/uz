@@ -1,21 +1,11 @@
 [
     {
         "name": "聚合",
-        "version": 2,
-        "webSite": "https://example.com",
+        "version": 4,
+        "webSite": "玩偶@https://wogg.xxooo.cf|木偶@https://666.666291.xyz,https://www.muou.asia,https://www.muou.site|蜡笔@http://xiaocgege.shop,http://fmao.shop,http://xiaocge.fun|闪电@https://sd.sduc.site|至臻@http://www.miqk.cc,https://zhizhen1.top,https://mihdr.top|多多@https://tv.214521.xyz,https://yydsys.de5.net,https://tv.yydsys.top|欧哥@https://woog.nxog.eu.org|二小@https://www.2xiaozhan.top,https://www.2xiaopan.top,https://www.wexwp.cc|虎斑@http://154.222.27.33:20720,http://xhban.xyz:20720,http://103.45.162.207:20720|小斑@http://154.201.83.50:12512,http://xsayang.fun:12512",
         "remark": "🍃豆儿出品，不属精品！",
-        "codeID": "hJtPKuu390DnC4yzdjOcWtrShAFY9SNT",
+        "codeID": "HPtEVaYJrYI4vNJfNuEmjePSvwxB45of",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/juhe.txt",
-        "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/juhe.png",
-        "type": 101
-    },
-    {
-        "name": "聚合²",
-        "version": 3,
-        "webSite": "https://example.com",
-        "remark": "🍃豆儿出品，不属精品！资源上传TG版本",
-        "codeID": "pafnuAv8mtqUyU0uq9spiIA9uL2YUxn2",
-        "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/juhe2.txt",
         "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/juhe.png",
         "type": 101
     },
