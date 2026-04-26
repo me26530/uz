@@ -61,6 +61,16 @@
       "type": 101
     },
     {
+      "name": "瓜子",
+      "version": 2,
+      "webSite": "https://api.w32z7vtd.com",
+      "remark": "🍃豆儿出品，不属精品！",
+      "codeID": "GsrfFOqB7JtHhaMDFHw9Xv3uHrCGSdwe",
+      "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/guazi.txt",
+      "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/guazi.png",
+      "type": 101
+    },
+    {
       "name": "Alist",
       "version": 1,
       "remark": "🍃豆儿出品，不属精品！自行修改自己的AList主页地址",
