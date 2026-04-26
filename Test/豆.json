@@ -6,7 +6,7 @@
         "remark": "🍃豆儿出品，不属精品！",
         "codeID": "hJtPKuu390DnC4yzdjOcWtrShAFY9SNT",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/juhe.txt",
-        "logo": "https://img.geekie.site/i/2026/03/21/140844.png",
+        "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/juhe.png",
         "type": 101
     },
     {
@@ -16,7 +16,7 @@
         "remark": "🍃豆儿出品，不属精品！资源上传TG版本",
         "codeID": "pafnuAv8mtqUyU0uq9spiIA9uL2YUxn2",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/juhe2.txt",
-        "logo": "https://img.geekie.site/i/2026/03/21/140844.png",
+        "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/juhe.png",
         "type": 101
     },
     {
@@ -26,7 +26,7 @@
         "remark": "🍃豆儿出品，不属精品！",
         "codeID": "8ahMn9JYo36y9hCvGILGdNf98aJGWLoI",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/wanou.txt",
-        "logo": "https://img.geekie.site/i/2026/01/12/151958.png",
+        "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/wanou.png",
         "type": 101
     },
     {
@@ -36,7 +36,7 @@
         "remark": "🍃豆儿出品，不属精品！",
         "codeID": "KYLSlWWPbLyvYgfUOW6xcVgP53RBZhMc",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/muou.txt",
-        "logo": "https://img.geekie.site/i/2026/01/12/154603.png",
+        "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/muou.png",
         "type": 101
     },
     {
@@ -46,7 +46,7 @@
         "remark": "",
         "env": "TG搜频道列表##格式 频道名称1@频道id1|频道名称2@频道id2",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/Pan_tgs.js",
-        "logo": "https://img.geekie.site/i/2026/01/12/145028.png",
+        "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/TG.png",
         "type": 101
     },
     {
@@ -57,7 +57,7 @@
       "webSite": "doubi",
       "codeID": "9Djl2QaDMOIgvhl8tYAhdVowEsmuPZpA",
       "api": "https://raw.githubusercontent.com/YYDS678/uzVideo-extensions/main/vod/js/Zhi_doubi.txt",
-      "logo": "https://img.geekie.site/i/2026/01/12/153122.png",
+      "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/bili.png",
       "type": 101
     },
     {
@@ -77,7 +77,7 @@
       "webSite": "https://download.avemujica.org",
       "codeID": "swAEnJ2uRVzAk8hp3Ba1Es6GfAk4TdpC",
       "api": "https://raw.githubusercontent.com/YYDS678/uzVideo-extensions/main/vod/js/Zhi_alist.txt",
-      "logo": "https://img.geekie.site/i/2026/01/12/153542.png",
+      "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/alist.png",
       "type": 101
     },
     {
@@ -88,7 +88,7 @@
       "webSite": "emby服务器地址",
       "codeID": "LAqQ8NcDuZBVF5zgN2jGwywEuz2VjPjM",
       "api": "https://raw.githubusercontent.com/YYDS678/uzVideo-extensions/main/vod/js/Zhi_emby.txt",
-      "logo": "https://img.geekie.site/i/2026/01/12/153726.png",
+      "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/emby.png",
       "type": 101
     },
     {
@@ -98,7 +98,7 @@
       "webSite": "https://so.252035.xyz",
       "codeID": "KbVx88vHdV15XvzvUxCQScqe9Ymk6wCX",
       "api": "https://raw.githubusercontent.com/YYDS678/uzVideo-extensions/main/vod/js/Pan_pansou.txt",
-      "logo": "https://img.geekie.site/i/2026/01/12/154212.png",
+      "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/pansou.png",
       "type": 101
     },
     {
@@ -108,7 +108,7 @@
       "webSite": "https://music.gdstudio.xyz/",
       "codeID": "M9nkucZA62rwJZsCkCkvdxuzYlRmmE4G",
       "api": "https://raw.githubusercontent.com/YYDS678/uzVideo-extensions/main/vod/js/Zhi_gdstudio.txt",
-      "logo": "https://img.geekie.site/i/2026/02/23/220741.png",
+      "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/GD.png",
       "type": 101
     }
 ]
