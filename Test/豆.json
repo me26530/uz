@@ -11,20 +11,20 @@
     },
     {
         "name": "玩偶",
-        "version": 4,
+        "version": 5,
         "webSite": "http://wogg.xxooo.cf",
         "remark": "🍃豆儿出品，不属精品！",
-        "codeID": "8ahMn9JYo36y9hCvGILGdNf98aJGWLoI",
+        "codeID": "E32tNDoArNiib1WdmoJhomGf8KDeAKNH",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/wanou.txt",
         "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/wanou.png",
         "type": 101
     },
     {
         "name": "木偶",
-        "version": 2,
+        "version": 3,
         "webSite": "https://666.666291.xyz",
         "remark": "🍃豆儿出品，不属精品！",
-        "codeID": "KYLSlWWPbLyvYgfUOW6xcVgP53RBZhMc",
+        "codeID": "HR9zyg0XB5HvGlyy5BpSiBZzwDrcvBHL",
         "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/muou.txt",
         "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/muou.png",
         "type": 101
