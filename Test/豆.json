@@ -31,7 +31,7 @@
     },
     {
         "name": "TG搜",
-        "version": 28,
+        "version": 29,
         "webSite": "https://t.me/s/",
         "remark": "🍃豆儿出品，不属精品！",
         "env": "TG搜频道列表##格式 频道名称1@频道id1|频道名称2@频道id2",

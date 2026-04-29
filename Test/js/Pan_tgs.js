@@ -1,5 +1,5 @@
 //@name:TG搜
-//@version:28
+//@version:29
 //@webSite:https://t.me/s/
 //@env:TG搜频道列表##格式 频道名称1@频道id1|频道名称2@频道id2
 //@remark:
@@ -129,6 +129,10 @@ const CLOUD_PROVIDERS = {
     pikpak: {
         name: 'PikPak',
         domains: ['pikpak.me']
+    },
+    xunlei: {
+        name: '迅雷',
+        domains: ['pan.xunlei.com']
     },
     guangya: {
         name: '光鸭',
