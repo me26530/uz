@@ -92,6 +92,17 @@
       "type": 101
     },
     {
+      "name": "TGFileBot",
+      "version": 1,
+      "remark": "🍃豆儿出品，不属精品！",
+      "env": "TGFileBot密码##可选，填写 TGFileBot files/config.json 里的 password；为空时不带鉴权参数",
+      "webSite": "http://127.0.0.1:8080",
+      "codeID": "AetdkpXa0NreYovcAJg0jGY5XyTB95mY",
+      "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/Zhi_tgfilebot.txt",
+      "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/bot.png",
+      "type": 101
+    },
+    {
       "name": "GD音乐台",
       "version": 4,
       "remark": "🍃豆儿出品，不属精品！仅供测试！所有内容均来自GD音乐台 music.gdstudio.xyz",
