@@ -71,6 +71,16 @@
       "type": 101
     },
     {
+      "name": "金牌",
+      "version": 1,
+      "webSite": "https://m.jiabaide.cn",
+      "remark": "🍃豆儿出品，不属精品！",
+      "codeID": "PMO2XOPnN8tk03SGld4srm9eGZDUB2pE",
+      "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/金牌.txt",
+      "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/金牌.png",
+      "type": 101
+    },
+    {
       "name": "韩小圈",
       "version": 1,
       "webSite": "https://hanxiaoquan.hanju.workers.dev",
@@ -78,6 +88,16 @@
       "codeID": "BcgDSJgqke0aKBWbNnCVJUIgDQtofsaX",
       "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/韩小圈.txt",
       "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/hanxiaoquan.png",
+      "type": 101
+    },
+    {
+      "name": "歪比巴卜",
+      "version": 1,
+      "webSite": "https://wbbb1.com",
+      "remark": "🍃豆儿出品，不属精品！",
+      "codeID": "7VwaIfzdcFLsPeSxr37NEARZgbpY3llh",
+      "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/歪比巴卜.txt",
+      "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/歪比巴卜.png",
       "type": 101
     },
     {
