@@ -142,12 +142,12 @@
     },
     {
       "name": "Emby",
-      "version": 6,
+      "version": 7,
       "remark": "🍃豆儿出品，不属精品！仅供测试！请使用不限制客户端的账号测试，封号概不负责！",
       "env": "Emby用户名##登录用户名&&Emby密码##登录密码",
       "webSite": "emby服务器地址",
-      "codeID": "LAqQ8NcDuZBVF5zgN2jGwywEuz2VjPjM",
-      "api": "https://raw.githubusercontent.com/YYDS678/uzVideo-extensions/main/vod/js/Zhi_emby.txt",
+      "codeID": "iyIbaZLXLMuSvR7jYPdrxk384HeQrVmk",
+      "api": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/js/emby.txt",
       "logo": "https://raw.githubusercontent.com/woleigedouer/uz/refs/heads/main/Test/image/emby.png",
       "type": 101
     },
